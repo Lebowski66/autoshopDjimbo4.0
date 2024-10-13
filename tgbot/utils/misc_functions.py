@@ -32,6 +32,9 @@ async def startup_notify(bot: Bot, arSession: ARS):
             """),
         )
 
+        await check_update(bot, arSession)
+
+
 # Автоматическая очистка ежедневной статистики после 00:00:15
 async def update_profit_day(bot: Bot):
     await send_admins(bot, get_statistics())
@@ -70,6 +73,29 @@ async def autobackup_admin(bot: Bot):
             )
         except:
             ...
+
+
+# Автоматическая проверка обновления каждые 24 часа
+async def check_update(bot: Bot, arSession: ARS):
+    session = await arSession.get_session()
+
+    try:
+        response = await session.get("https://djimbo.dev/autoshop_update.json", ssl=False)
+        response_data = json.loads((await response.read()).decode())
+
+        if float(response_data['version']) > float(BOT_VERSION):
+            await send_admins(
+                bot,
+                ded(f"""
+                    <b>❇️ Вышло обновление: <a href='{response_data['download']}'>Скачать</a></b>
+                    ➖➖➖➖➖➖➖➖➖➖
+                    {response_data['text']}
+                    ➖➖➖➖➖➖➖➖➖➖
+                    <code>❗ Данное сообщение видят только администраторы бота.</code>
+                """),
+            )
+    except Exception as ex:
+        print(f"myError check update: {ex}")
 
 
 # Расссылка админам о критических ошибках и обновлениях

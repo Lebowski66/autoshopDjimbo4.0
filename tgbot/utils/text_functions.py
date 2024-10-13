@@ -32,13 +32,16 @@ async def open_profile_user(bot: Bot, user_id: Union[int, str]):
     count_items = sum([purchase.purchase_count for purchase in get_purchases])
 
     send_text = ded(f"""
-        <b>👤 Ваш профиль:</b>
+        <b>👤 Мой профиль:</b>
         ➖➖➖➖➖➖➖➖➖➖
-        🆔 ID: <code>{get_user.user_id}</code>
-        💰 Баланс: <code>{get_user.user_balance}₽</code>
-        🎁 Куплено товаров: <code>{count_items}шт</code>
+        <b>🆔 ID: </b><code>{get_user.user_id}</code>
+        <b>⏰ Регистрация:</b> <code>{convert_date(get_user.user_unix, False, False)} ({convert_day(how_days)})</code>
+        <b>💼 Куплено товаров:</b> <code>{count_items} шт</code>
+        
+        <b>💰 Баланс:</b> <code>{get_user.user_balance}₽</code>
+        
 
-        🕰 Регистрация: <code>{convert_date(get_user.user_unix, False, False)} ({convert_day(how_days)})</code>
+        
     """)
 
     await bot.send_message(
@@ -55,17 +58,17 @@ async def position_open_user(bot: Bot, user_id: int, position_id: Union[str, int
     get_category = Categoryx.get(category_id=get_position.category_id)
 
     if get_position.position_desc != "None":
-        text_desc = f"\n▪️ Описание: {get_position.position_desc}"
+        text_desc = f"\n▪️<b> Описание: </b>{get_position.position_desc}"
     else:
         text_desc = ""
 
     send_text = ded(f"""
         <b>🎁 Покупка товара:</b>
         ➖➖➖➖➖➖➖➖➖➖
-        ▪️ Название: <code>{get_position.position_name}</code>
-        ▪️ Категория: <code>{get_category.category_name}</code>
-        ▪️ Стоимость: <code>{get_position.position_price}₽</code>
-        ▪️ Количество: <code>{len(get_items)}шт</code>
+        ▪️<b> Название:</b> <code>{get_position.position_name}</code>
+        ▪️<b> Категория:</b> <code>{get_category.category_name}</code>
+        ▪️<b> Стоимость: </b><code>{get_position.position_price}₽</code>
+        ▪️<b> Количество:</b> <code>{len(get_items)}шт</code>
         {text_desc}
     """)
 
@@ -194,7 +197,7 @@ async def category_open_admin(bot: Bot, user_id: int, category_id: Union[str, in
         ➖➖➖➖➖➖➖➖➖➖
         ▪️ Позиция: <code>{get_category.category_name}</code>
         ▪️ Кол-во позиций: <code>{len(get_positions)}шт</code>
-        ▪️ Дата создания: <code>{convert_date(get_category.category_unix)}шт</code>
+        ▪️ Дата создания: <code>{convert_date(get_category.category_unix)}</code>
     """)
 
     await bot.send_message(

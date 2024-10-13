@@ -200,7 +200,7 @@ async def refill_success(
     )
 
     await call.message.edit_text(
-        f"<b>💰 Вы пополнили баланс на сумму <code>{pay_amount}₽</code>. Удачи ❤️\n"
+        f"<b>💰 Вы пополнили баланс на сумму <code>{pay_amount}₽</code>.\n"
         f"🧾 Чек: <code>#{pay_receipt}</code></b>",
     )
 

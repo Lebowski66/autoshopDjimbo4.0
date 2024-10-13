@@ -104,9 +104,10 @@ async def main_start(message: Message, bot: Bot, state: FSM, arSession: ARS):
 
     await message.answer(
         ded("""
-            🔸 Бот готов к использованию.
-            🔸 Если не появились вспомогательные кнопки
+            *🐻 Магазин \| БЛЕК РАША*
+            🔸 Если не появилось меню
             🔸 Введите /start
-        """),
+        """).replace('.', '\.').replace('-', '\-'),
         reply_markup=menu_frep(message.from_user.id),
+        parse_mode="MarkdownV2"
     )

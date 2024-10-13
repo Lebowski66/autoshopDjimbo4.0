@@ -19,7 +19,7 @@ router = Router(name=__name__)
 
 
 # Открытие товаров
-@router.message(F.text == "🎁 Купить")
+@router.message(F.text == "🛒 Купить")
 async def user_shop(message: Message, bot: Bot, state: FSM, arSession: ARS):
     await state.clear()
 
@@ -43,7 +43,7 @@ async def user_profile(message: Message, bot: Bot, state: FSM, arSession: ARS):
 
 
 # Проверка товаров в наличии
-@router.message(F.text == "🧮 Наличие товаров")
+@router.message(F.text == "🗂 Наличие товаров")
 async def user_available(message: Message, bot: Bot, state: FSM, arSession: ARS):
     await state.clear()
 
@@ -58,7 +58,7 @@ async def user_available(message: Message, bot: Bot, state: FSM, arSession: ARS)
         await message.answer("<b>🎁 Увы, товары в данное время отсутствуют.</b>")
 
 # Открытие FAQ
-@router.message(F.text.in_(('❔ FAQ', '/faq')))
+@router.message(F.text.in_(('👥 Чаты', '/chat')))
 async def user_faq(message: Message, bot: Bot, state: FSM, arSession: ARS):
     await state.clear()
 
@@ -79,7 +79,7 @@ async def user_faq(message: Message, bot: Bot, state: FSM, arSession: ARS):
 
 
 # Открытие сообщения с ссылкой на поддержку
-@router.message(F.text.in_(('☎️ Поддержка', '/support')))
+@router.message(F.text.in_(('🛡 Поддержка', '/support')))
 async def user_support(message: Message, bot: Bot, state: FSM, arSession: ARS):
     await state.clear()
 
@@ -96,7 +96,7 @@ async def user_support(message: Message, bot: Bot, state: FSM, arSession: ARS):
         )
 
     await message.answer(
-        "<b>☎️ Нажмите кнопку ниже для связи с Администратором.</b>",
+        "<b>🛡Нажмите кнопку ниже для связи с Поддержкой.</b>",
         reply_markup=user_support_finl(get_settings.misc_support),
     )
 

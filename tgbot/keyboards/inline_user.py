@@ -15,8 +15,8 @@ def user_profile_finl() -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardBuilder()
 
     keyboard.row(
-        ikb("💰 Пополнить", data="user_refill"),
-        ikb("🎁 Мои покупки", data="user_purchases"),
+        ikb("💳 Пополнить", data="user_refill"),
+        ikb("🛍 Мои покупки", data="user_purchases"),
     )
 
     return keyboard.as_markup()
@@ -27,7 +27,7 @@ def user_support_finl(support_login: str) -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardBuilder()
 
     keyboard.row(
-        ikb("💌 Написать в поддержку", url=f"https://t.me/ddvirtshelp"),
+        ikb("💌 Написать в поддержку", url=f"https://t.me/{support_login}"),
     )
 
     return keyboard.as_markup()
@@ -44,7 +44,7 @@ def refill_method_finl() -> Union[InlineKeyboardMarkup, None]:
     if get_payments.way_qiwi == "True":
         keyboard.row(ikb("🥝 QIWI", data="user_refill_method:QIWI"))
     if get_payments.way_yoomoney == "True":
-        keyboard.row(ikb("🔮 ЮMoney", data="user_refill_method:Yoomoney"))
+        keyboard.row(ikb("💳 Карта/ЮMoney", data="user_refill_method:Yoomoney"))
 
     keyboard.row(ikb("🔙 Вернуться", data="user_profile"))
 

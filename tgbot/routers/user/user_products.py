@@ -283,11 +283,11 @@ async def user_buy_confirm(call: CallbackQuery, bot: Bot, state: FSM, arSession:
 
     await call.message.answer(
         ded(f"""
-            <b>✅ Вы успешно купили товар(ы)</b>
+            <b>✅ Спасибо за покупку!</b>
             ➖➖➖➖➖➖➖➖➖➖
-            ▪️ Чек: <code>#{purchase_receipt}</code>
-            ▪️ Товар: <code>{get_position.position_name} | {purchase_count}шт | {purchase_price}₽</code>
-            ▪️ Дата покупки: <code>{convert_date(purchase_unix)}</code>
+            <b>▪️ Чек:</b> <code>#{purchase_receipt}</code>
+            <b>▪️ Товар:</b> <code>{get_position.position_name} | {purchase_count}шт | {purchase_price}₽</code>
+            <b>▪️ Дата покупки:</b> <code>{convert_date(purchase_unix)}</code>
         """),
         reply_markup=menu_frep(call.from_user.id),
     )

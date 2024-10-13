@@ -48,10 +48,6 @@ def get_desc() -> str:
 
     # УДАЛИШЬ ИЛИ ИЗМЕНИШЬ ССЫЛКИ НА ДОНАТ, КАНАЛ И ТЕМУ БОТА - КАСТРИРУЮ НАХУЙ <3
 
-    return ded(f"""
-        <b>♻️ Bot Version: <code>{BOT_VERSION}</code>
-        👑 Bot created by @djimbox
-        🍩 Donate to the author: <a href='https://yoomoney.ru/to/410012580032553'>Click me</a>
-        🤖 Bot channel [NEWS | UPDATES]: <a href='https://t.me/DJIMBO_SHOP'>Click me</a>
-        🔗 Topic Link: <a href='https://lolz.guru/threads/1888814'>Click me</a></b>
+    return ded(f"""ок
+       
     """).strip()

@@ -14,7 +14,7 @@ from tgbot.services.api_session import AsyncRequestSession
 from tgbot.utils.misc.bot_commands import set_commands
 from tgbot.utils.misc.bot_logging import bot_logger
 from tgbot.utils.misc.bot_models import ARS
-from tgbot.utils.misc_functions import (check_bot_username, startup_notify, update_profit_day,
+from tgbot.utils.misc_functions import (check_update, check_bot_username, startup_notify, update_profit_day,
                                         update_profit_week, autobackup_admin, check_mail, update_profit_month,
                                         autosettings_unix)
 
@@ -27,6 +27,7 @@ async def scheduler_start(bot: Bot, arSession: ARS):
     BOT_SCHEDULER.add_job(update_profit_week, trigger="cron", day_of_week="mon", hour=00, minute=00, second=10)
     BOT_SCHEDULER.add_job(update_profit_day, trigger="cron", hour=00, minute=00, second=15, args=(bot,))
     BOT_SCHEDULER.add_job(autobackup_admin, trigger="cron", hour=00, args=(bot,))
+    BOT_SCHEDULER.add_job(check_update, trigger="cron", hour=00, args=(bot, arSession,))
     BOT_SCHEDULER.add_job(check_mail, trigger="cron", hour=12, args=(bot, arSession,))
 
 
@@ -44,13 +45,13 @@ async def main():
         await autosettings_unix()  # Автонастройка UNIX времени в БД
         await set_commands(bot)  # Установка команд
         await check_bot_username(bot)  # Проверка юзернейма бота в БД
+        await check_update(bot, arSession)  # Проверка обновлений
         await check_mail(bot, arSession)  # Оповещение обновлений
         await startup_notify(bot, arSession)  # Рассылка при запуске бота
         await scheduler_start(bot, arSession)  # Подключение шедулеров
 
         bot_logger.warning("BOT WAS STARTED")
         print(colorama.Fore.LIGHTYELLOW_EX + f"~~~~~ Bot was started - @{(await bot.get_me()).username} ~~~~~")
-        print(colorama.Fore.LIGHTBLUE_EX + "~~~~~ TG developer - @djimbox ~~~~~")
         print(colorama.Fore.RESET)
 
         if len(get_admins()) == 0: print("***** ENTER ADMIN ID IN settings.ini *****")

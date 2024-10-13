@@ -11,9 +11,9 @@ def menu_frep(user_id) -> ReplyKeyboardMarkup:
     keyboard = ReplyKeyboardBuilder()
 
     keyboard.row(
-        rkb("🎁 Купить"), rkb("👤 Профиль"), rkb("🧮 Наличие товаров"),
+        rkb("🛒 Купить"), rkb("👤 Профиль"),
     ).row(
-        rkb("☎️ Поддержка"), rkb("❔ FAQ")
+        rkb("🛡 Поддержка"), rkb("👥 Чаты")
     )
 
     if user_id in get_admins():
